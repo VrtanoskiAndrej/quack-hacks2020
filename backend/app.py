@@ -1,9 +1,5 @@
 from flask import Flask, abort, jsonify, request
-<<<<<<< HEAD
 import numpy as np
-=======
-from flask import abort
->>>>>>> f70dc5cba5d2b1985dfdcc8e98c1c8486c0445c2
 
 app = Flask(__name__)
 
@@ -50,3 +46,12 @@ def recommend_matches(userid):
 
     matches = [{}]
     return jsonify({'Recommended peers': matches})
+
+def findMaxIndex(array):
+    maximum = array[0]
+    maxIndex = 0
+    for index in range(0, len(array)):
+        if(array[index] > maximum):
+            maximum = array[index]
+            maxIndex = index
+    return maxIndex
