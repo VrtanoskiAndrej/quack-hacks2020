@@ -1,4 +1,5 @@
 from flask import Flask, abort, jsonify, request
+import numpy as np
 
 app = Flask(__name__)
 
@@ -6,9 +7,10 @@ app = Flask(__name__)
 def create_user():
     #Check for the data
     if not request.json:    #can add other conditions later to make sure it has certain data with: or not 'data' in request.json. Will need to check formats too
+        """or not 'firstName' in request.json or not 'lastName' in request.json or not 'phoneNumber' in request.json"""
         abort(400)
     
-    """Here goes the code to take that data and store it in the databse"""
+    """Pass in to database"""
 
     return jsonify({'created': True}), 201
 
@@ -28,12 +30,28 @@ def update_user(userid):
 
 @app.route('/app/api/recommend/<int:userid>', methods = ['GET'])
 def recommend_matches(userid):
-    user = [{}] #get the user's information and store it in a list
-    #abort if this user has no information --- not sure if this is totally Needed
-    if len(user) == 0:
-        abort(404)
+    #define matrices containing the other user's course and interests as well as single row matrices representing the user's
+    courseDB = np.array(courseDB())
+    interestDB = np.array(interestDB())
+    user_course = np.array(courseDB[userid - 1])
+    user_interest = np.array(interestDB[userid - 1])
 
-    """Code to now compare with everybody"""
+    #use masking to multiply correspondng matrices together to get user scores for each category
+    courseScores = np.matmul(courseDB, user_course)
+    interestScores = np.matmul(interestDB, user_interest)
+    finalScores = np.add(courseScores, interestScores)
+
+    maxScore = np.amax(finalScores)
+    maxID = np.where(finalScores == np.amax(finalScores))
 
     matches = [{}]
     return jsonify({'Recommended peers': matches})
+
+def findMaxIndex(array):
+    maximum = array[0]
+    maxIndex = 0
+    for index in range(0, len(array)):
+        if(array[index] > maximum):
+            maximum = array[index]
+            maxIndex = index
+    return maxIndex

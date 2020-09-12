@@ -7,28 +7,10 @@ class InputField extends Component {
     constructor(props) {
         super(props);
         this.state = ({
-                hobbies: [{ id: 1, name: 'Gaming' }], hobbySuggestions, courses: [{ id: 0, name: "CS 1301"}], courseSuggestions, email: "", username:"", firstName:"", lastName:"",phoneNumber:""
+                hobbies: [{ id: 1, name: 'Gaming' }], hobbySuggestions, courses: [{ id: 0, name: "CS 1301"}], courseSuggestions
             }
         );
         this.reactTags = React.createRef()
-        this.handleChange = this.handleChange.bind(this);
-        this.onClickSubmit = this.onClickSubmit.bind(this);
-    }
-
-    getOutputJSON() {
-        return {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            username: this.state.username,
-            email: this.state.email,
-            phoneNumber: this.state.phoneNumber,
-            hobbies: this.state.hobbies,
-            courses: this.state.courses
-        }
-    }
-
-    onClickSubmit(){
-        console.log(JSON.stringify(this.getOutputJSON()))
     }
 
     onDeleteHobbies (i) {
@@ -53,19 +35,16 @@ class InputField extends Component {
         this.setState({courses: tags })
     }
 
-    handleChange(i, event){
-        this.setState({[i]: event.target.value})
-    }
 
     render() {
         return (
             <div className="col-md-8">
                 <h4 className="mb-3">Details</h4>
-                <form className="needs-validation" noValidate="" autocomplete="off">
+                <form className="needs-validation" noValidate="">
                     <div className="row">
                         <div className="col-md-6 mb-3">
                             <label htmlFor="firstName">First name</label>
-                            <input type="text" value= {this.state.firstName} onChange={(e) => this.handleChange('firstName', e)} className="form-control" id="firstName" placeholder=""
+                            <input type="text" className="form-control" id="firstName" placeholder="" value=""
                                    required=""/>
                             <div className="invalid-feedback">
                                 Valid first name is required.
@@ -73,7 +52,7 @@ class InputField extends Component {
                         </div>
                         <div className="col-md-6 mb-3">
                             <label htmlFor="lastName">Last name</label>
-                            <input type="text" value= {this.state.lastName} onChange={(e) => this.handleChange('lastName', e)} className="form-control" id="lastName" placeholder=""
+                            <input type="text" className="form-control" id="lastName" placeholder="" value=""
                                    required=""/>
                             <div className="invalid-feedback">
                                 Valid last name is required.
@@ -87,7 +66,7 @@ class InputField extends Component {
                             <div className="input-group-prepend">
                                 <span className="input-group-text">@</span>
                             </div>
-                            <input type="text" value ={this.state.username} onChange={(e) => this.handleChange('username', e)} className="form-control" id="username" placeholder="Username"
+                            <input type="text" className="form-control" id="username" placeholder="Username"
                                    required=""/>
                             <div className="invalid-feedback">
                                 Your username is required.
@@ -97,17 +76,9 @@ class InputField extends Component {
 
                     <div className="mb-3">
                         <label htmlFor="email">Email <span className="text-muted">(Optional)</span></label>
-                        <input type="email" value ={this.state.email} onChange={(e) => this.handleChange('email', e)} className="form-control" id="email" placeholder="you@example.com"/>
+                        <input type="email" className="form-control" id="email" placeholder="you@example.com"/>
                         <div className="invalid-feedback">
                             Please enter a valid email address for shipping updates.
-                        </div>
-                    </div>
-
-                    <div className="mb-3">
-                        <label>Phone Number</label>
-                        <input type="number" value ={this.state.phoneNumber} onChange={(e) => this.handleChange('phoneNumber', e)} className="form-control" id="phone" placeholder="(###)###-####"/>
-                        <div className="invalid-feedback">
-                            Please enter a valid phone number for mobile updates.
                         </div>
                     </div>
                     <div className="mb-3">
@@ -130,8 +101,12 @@ class InputField extends Component {
                             onAddition={this.onAdditionCourses.bind(this)}
                         />
                     </div>
-                    <button type="button" className="btn btn-lg btn-block btn-primary mb-5" onClick={this.onClickSubmit}>Submit</button>
                 </form>
+
+
+                <pre><code>{JSON.stringify(this.state.hobbies, null, 2)}</code></pre>
+                <pre><code>{JSON.stringify(this.state.courses, null, 2)}</code></pre>
+
 
             </div>
         );
