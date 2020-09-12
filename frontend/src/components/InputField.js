@@ -1,26 +1,38 @@
 import React, {Component} from 'react';
 import ReactTags from "react-tag-autocomplete";
-import suggestions from './Interests'
+import hobbySuggestions from './Interests';
+import courseSuggestions from  './Courses';
 
 class InputField extends Component {
     constructor(props) {
         super(props);
         this.state = ({
-                tags: [{ id: 1, name: 'Gaming' }], suggestions
+                hobbies: [{ id: 1, name: 'Gaming' }], hobbySuggestions, courses: [{ id: 0, name: "CS 1301"}], courseSuggestions
             }
         );
         this.reactTags = React.createRef()
     }
 
-    onDelete (i) {
-        const tags = this.state.tags.slice(0)
+    onDeleteHobbies (i) {
+        const tags = this.state.hobbies.slice(0)
         tags.splice(i, 1)
-        this.setState({ tags })
+        this.setState({hobbies: tags })
     }
 
-    onAddition (tag) {
-        const tags = [].concat(this.state.tags, tag)
-        this.setState({ tags })
+    onAdditionHobbies (tag) {
+        const tags = [].concat(this.state.hobbies, tag)
+        this.setState({ hobbies: tags })
+    }
+
+    onDeleteCourses (i) {
+        const tags = this.state.courses.slice(0)
+        tags.splice(i, 1)
+        this.setState({courses: tags })
+    }
+
+    onAdditionCourses (tag) {
+        const tags = [].concat(this.state.courses, tag)
+        this.setState({courses: tags })
     }
 
 
@@ -69,20 +81,31 @@ class InputField extends Component {
                             Please enter a valid email address for shipping updates.
                         </div>
                     </div>
-                    <div>
+                    <div className="mb-3">
                     <label>Hobbies</label>
                     <ReactTags
                         ref={this.reactTags}
-                        tags={this.state.tags}
-                        suggestions={this.state.suggestions}
-                        onDelete={this.onDelete.bind(this)}
-                        onAddition={this.onAddition.bind(this)}
+                        tags={this.state.hobbies}
+                        suggestions={this.state.hobbySuggestions}
+                        onDelete={this.onDeleteHobbies.bind(this)}
+                        onAddition={this.onAdditionHobbies.bind(this)}
                     />
+                    </div>
+                    <div className="mb-3">
+                        <label>Courses</label>
+                        <ReactTags
+                            ref={this.reactTags}
+                            tags={this.state.courses}
+                            suggestions={this.state.courseSuggestions}
+                            onDelete={this.onDeleteCourses.bind(this)}
+                            onAddition={this.onAdditionCourses.bind(this)}
+                        />
                     </div>
                 </form>
 
 
-                <pre><code>{JSON.stringify(this.state.tags, null, 2)}</code></pre>
+                <pre><code>{JSON.stringify(this.state.hobbies, null, 2)}</code></pre>
+                <pre><code>{JSON.stringify(this.state.courses, null, 2)}</code></pre>
 
 
             </div>
