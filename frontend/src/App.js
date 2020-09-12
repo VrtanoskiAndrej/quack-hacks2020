@@ -31,20 +31,16 @@ class App extends Component {
                     <div className="container d-flex justify-content-between">
                         <a href="#" className="navbar-brand d-flex align-items-center">
                             <i className="fa fa-users mr-2"></i>
-                            <strong>Quack</strong>
+                            <strong>Acquaint - QuackHacks 2020</strong>
                         </a>
                     </div>
                 </div>
                 <section className="jumbotron text-center">
                     <div className="container">
                         <h1>Create a profile and get to know people</h1>
-                        <p className="lead text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                            ultrices pellentesque diam ac dapibus. Maecenas finibus vehicula viverra. In hac habitasse
-                            platea dictumst. In rutrum finibus congue. Sed nec purus scelerisque, fermentum urna vitae,
-                            varius erat. Nam faucibus magna vel sem condimentum pulvinar id eu augue. Nunc euismod
-                            blandit congue. Etiam nec dui at nisi eleifend iaculis. </p>
+                        <p className="lead text-muted">Meet hundereds of people around campus that share your similar interests. Setup your Acquaint account below and get the opportunity to share your experience with many others.</p>
                         <p>
-                            <button onClick={this.showLoginStateHandler} className="btn btn-danger">Try Now</button>
+                            <button onClick={this.showLoginStateHandler} className="btn btn-lg btn-danger">Try Now</button>
                         </p>
                     </div>
                 </section>
@@ -55,11 +51,9 @@ class App extends Component {
                 <section className="jumbotron text-center">
                     <div className="container">
                         <h1>Find people with similar interests</h1>
-                        <p className="lead text-muted">Sed nec purus scelerisque, fermentum urna vitae,
-                            varius erat. Nam faucibus magna vel sem condimentum pulvinar id eu augue. Nunc euismod
-                            blandit congue. Etiam nec dui at nisi eleifend iaculis. </p>
+                        <p className="lead text-muted">Our intelligent algorithm hand selects through hundreds of people with similar interests and similar scheduals as you, allowing you to meet new people and socialize at a distance. </p>
                         <p>
-                            <button onClick={this.showGalleryStateHandler} className="btn btn-primary">Find My Matches</button>
+                            <button onClick={this.showGalleryStateHandler} className="btn btn-lg btn-primary">Find My Matches</button>
                         </p>
                     </div>
                 </section>
