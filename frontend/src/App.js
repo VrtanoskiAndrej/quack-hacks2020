@@ -3,6 +3,19 @@ import InputField from "./components/InputField";
 import './App.css';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {shown: false};
+        this.showStateHandler = this.showStateHandler.bind(this);
+    }
+
+    showStateHandler(){
+        this.setState(prevState => ({
+            shown: !prevState.shown
+        }));
+    }
+
+
     render() {
         return (
             <div className="App">
@@ -23,13 +36,14 @@ class App extends Component {
                             varius erat. Nam faucibus magna vel sem condimentum pulvinar id eu augue. Nunc euismod
                             blandit congue. Etiam nec dui at nisi eleifend iaculis. </p>
                         <p>
-                            <a href="#" className="btn btn-primary">Try now</a>
+                            <button onClick={this.showStateHandler} className="btn btn-danger">Try now</button>
                         </p>
                     </div>
                 </section>
+                { this.state.shown ?
                 <div className='container d-flex justify-content-center'>
                     <InputField/>
-                </div>
+                </div> : null}
             </div>
         );
     }
